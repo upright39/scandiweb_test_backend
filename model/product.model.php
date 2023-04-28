@@ -3,22 +3,19 @@ abstract class productModel extends Database
 {
     abstract protected function getProducts();
     abstract protected function addProduct($sku, $names, $price, $types, $details);
+    abstract protected function delete($ids);
 }
-
-
 class Product extends productModel
 {
     protected function getProducts()
     {
         //create query
         $sql = 'SELECT * FROM products';
-
         //prepered statement
         $stmt = $this->connect()->query($sql);
-     
+
         return $stmt;
     }
-
 
     protected function addProduct($sku, $names, $price, $types, $details)
     {
@@ -27,13 +24,15 @@ class Product extends productModel
         $stmt->bind_param('sssss', $sku, $names, $price, $types, $details);
 
         if ($stmt->execute()) {
-            echo json_encode(array('message'=>'product created successfuly'));
+            echo json_encode(array('message' => 'product created successfuly', 'status' => 200));
         } else {
-            echo "Error: " . $stmt->error;
+            echo json_encode(array("error" => $stmt->error));
         }
-        
         $stmt->close();
-        
+    }
 
+    protected function delete($sql)
+    {
+        $this->connect()->query($sql);
     }
 }
