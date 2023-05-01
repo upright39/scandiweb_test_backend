@@ -10,7 +10,7 @@ class Product extends productModel
     protected function getProducts()
     {
         //create query
-        $sql = 'SELECT * FROM products';
+        $sql = 'SELECT * FROM products ORDER BY id DESC';
         //prepered statement
         $stmt = $this->connect()->query($sql);
 
