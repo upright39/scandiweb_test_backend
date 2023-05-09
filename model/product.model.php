@@ -17,6 +17,21 @@ class Product extends productModel
         return $stmt;
     }
 
+
+    public function getSku($sku)
+    {
+        // $sql = "SELECT * FROM products WHERE sku = '$sku'";
+        $sql = "SELECT id FROM products WHERE sku = '$sku'";
+        $smt = $this->connect()->query($sql);
+
+        if (mysqli_num_rows($smt) > 0) {
+            $response = array('isUnique' => false);
+        } else {
+            $response = array('isUnique' => true);
+        }
+        echo json_encode($response);
+    }
+
     protected function addProduct($sku, $names, $price, $types, $details)
     {
         $sql = "INSERT INTO products (sku, names, price, types, details) VALUES (?,?,?,?,?)";

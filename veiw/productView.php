@@ -39,5 +39,18 @@ class productView extends Product
         );
       }
     }
+
+  public function getSingleSkuProduct($sku)
+  {
+    $smt = $this->getSku($sku);
   
+  //   if($smt->num_rows > 0){
+  //     $response = array('sku'=> 'please sku must be unique' , 'exist'=> true);
+  //   }else{
+  //       $response = array('exist' => false);
+  //   };
+
+  // echo json_encode($response);
+  return $smt;
+  }
 }

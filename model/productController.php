@@ -7,7 +7,6 @@ class productContr extends Product
   private $types;
   private $details;
 
-
   public function __construct($sku, $names, $price, $types, $details)
   {
     $this->sku = $sku;
@@ -37,7 +36,7 @@ class productContr extends Product
     }
   }
    
-  private function sani($data)
+  private function sani(string $data)
   {
     $data = trim($data);
     $data = stripslashes($data);
