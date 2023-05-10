@@ -17,7 +17,6 @@ class Product extends productModel
         return $stmt;
     }
 
-
     public function getSku($sku)
     {
         // $sql = "SELECT * FROM products WHERE sku = '$sku'";
