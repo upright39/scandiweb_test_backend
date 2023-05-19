@@ -23,19 +23,9 @@ class productContr extends Product
 
   public function deleteSelectedProducts($ids)
   {
-    // Construct the SQL query to delete the selected items from the database
-    $sql = "DELETE FROM products WHERE id IN (" . implode(",", $ids) . ")";
-
-    $stmt = $this->delete($sql);
-
-    // Execute the query
-    if (isset($stmt)) {
-      echo json_encode(['message' => 'Items deleted successfully.']);
-    } else {
-      echo json_encode(['error' => 'Failed to delete items from the database.']);
-    }
+     $this->delete($ids);
   }
-   
+
   private function sani(string $data)
   {
     $data = trim($data);

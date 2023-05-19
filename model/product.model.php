@@ -45,8 +45,22 @@ class Product extends productModel
         $stmt->close();
     }
 
-    protected function delete($sql)
+    protected function delete($ids)
     {
-        $this->connect()->query($sql);
+
+        // Construct the SQL query to delete the selected items from the database
+        $sql = "DELETE FROM products WHERE id IN (" . implode(",", $ids) . ")";
+
+        // Execute the query
+        if ($this->connect()->query($sql)) {
+            // If the query was successful, return a success response
+            header('Content-Type: application/json');
+            echo json_encode(['message' => 'Items deleted successfully.']);
+        } else {
+            // If the query failed, return an error response
+            header('HTTP/1.1 500 Internal Server Error');
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 'Failed to delete items from the database.']);
+        }
     }
 }
